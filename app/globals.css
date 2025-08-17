@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply font-poppins;
+  }
+
+  body > div {
+    @apply overflow-x-hidden;
+  }
+
+  /* remove highlight */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer utilities {
+  .safe-layout {
+    @apply max-w-[1440px] mx-auto !important;
+  }
+
+  .safe-x-padding {
+    @apply px-[20px] md:px-[50px] lg:px-[120px];
+  }
+
+  .gradient-text {
+    @apply text-transparent bg-gradient-to-r from-primary to-secondary bg-clip-text;
+  }
+
+  .gradient-bg {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .gradient-btn {
+    @apply bg-gradient-to-r from-primary to-secondary text-white border-none shadow-md relative z-[1];
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.gradient-btn:hover {
+  transform: scale(1.05);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.gradient-btn:active {
+  transform: scale(0.9);
+}
+
+.gradient-btn::before {
+  @apply bg-gradient-to-l from-secondary to-primary rounded-lg absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out;
+  content: "";
+  z-index: -1;
+  left: -100%;
+}
+
+.gradient-btn:hover::before {
+  left: 0;
+}
+
+/* Mobile & Tablet Hamburger */
+.hamburger svg {
+  @apply w-[40px];
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger svg > path.line {
+  @apply stroke-secondary;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger svg > path.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  @apply -rotate-[45deg];
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
